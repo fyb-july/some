@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var reverse = function(x) {
+        var MAX=2**31-1
+        var MIN=-(2**31)
+        var n=0
+            while(x){
+            n=n*10+x%10
+            x=parseInt(x/10)
+        }
+          console.log(n)
+          console.log(MAX)
+        if(n>MAX || n<MIN|| n===0){
+            return 0
+        }else{
+            return n
+        }
+        };
+      console.log(reverse(156))  
+    </script>
+</body>
+</html>

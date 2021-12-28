@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+
+</style>
+
+<body>
+    <div class='mirrorTitle'>PURCHASE MIRROR</div>
+    <div class='mirrorTopProgress'>
+        <ul>
+            <li><a class="grayColor redColor {% if bundle.current_section.index==0%}showItems{%endif%} ">STEP1:<span
+                        class='blackColor'>SELECT YOUR DEVICE</span></a></li>
+            <li class='{% if bundle.current_section.index>=1%}backgroundAfter{%endif%}'><a
+                    class="grayColor {% if bundle.current_section.index>=1%} redColor {%endif%} {% if bundle.current_section.index==1%}showItems{%endif%}">STEP2:<span
+                        class="{% if bundle.current_section.index>=1%}blackColor{%endif%}">SELECT MEMBERSHIP</span></a>
+            </li>
+            <li class='{% if bundle.current_section.index>=2%}backgroundAfter{%endif%}'><a
+                    class="grayColor {% if bundle.current_section.index>=2%} redColor {%endif%} {% if bundle.current_section.index==2%}showItems{%endif%}">STEP3:<span
+                        class="{% if bundle.current_section.index>=2%}blackColor{%endif%}">SELECT INSTALLATION
+                        SERVICE</span></a></li>
+        </ul>
+    </div>
+    <div class="contanier">
+        {% for product in bundle.current_section.products %}
+        <div class='mirrorFather'>
+            <div class="child1">
+                {%-if product.image.src-%}
+                <img src="{{ product.image.src }}" />
+                {%-else-%}
+                <div class="childBox">
+                </div>
+                {%-endif-%}
+                <div class='child1Price'>
+                    <h5>{{product.title}}</h5>
+                    <h5 class="variant-price">{{ product.available_variants[0].price | money }}</h5>
+                </div>
+            </div>
+
+            <div class="child3">
+                <div class='childTop'>
+                    {% for variant in product.variants_in_bundle %}
+                    {%assign canNext=variant.count%}
+                    {% change_quantity_form %}
+                    <div class='setBtnBorder'>
+                        <input type="hidden" name="variant" value="{{ variant.id }}" />
+                        <input type="hidden" name="section" value="{{ bundle.current_section.index }}" />
+                        <button type="submit" name="remove">remove</button>
+                        <button type="submit" name="add" id='productRemove'>+</button>
+                    </div>
+                    {% end_change_quantity_form %}
+                    {% endfor %}
+                </div>
+                <div class='childBottom'>
+                    {% add_to_bundle_form bundle.current_section %}
+                    {% if product.available_variants.size > 1 %}
+                    <select name="variant" id="select-{{ bundle.current_section.index }}-{{ product.id }}">
+                        {% for variant in product.available_variants %}
+                        <option value="{{ variant.id }}" data-price={{ variant.price | money }}>
+                            {{ variant.title }}{% if variant.available_count %} (available: {{ variant.available_count
+                            }}){% endif %}
+                        </option>
+                        {% endfor %}
+                    </select>
+                    {% else %}
+                    <input type="hidden" name="variant" value="{{ product.available_variants[0].id }}" />
+                    {% if product.available_variants[0].available_count %} (available: {{
+                    product.available_variants[0].available_count }}){% endif %}
+                    {% endif %}
+                    <button type="submit" class='mirrorAddBtn {%if canNext>=1%}mirrorAddedBtn{%endif%}'> ADD{%if
+                        canNext>=1%}ED{%endif%}</button>
+                    {% end_add_to_bundle_form %}
+                </div>
+
+            </div>
+        </div>
+        {% endfor %}
+        <div class='mobileMiddle'><span>VIEW ORDER CONTENTS ({{ bundle.content.items.size }})</span></div>
+    </div>
+    <div class='mirrorBottomFixed'>
+        <div class='left'>
+            {% if bundle.has_prev_section %}
+            {% section_switch_form %}
+            <input type="hidden" name="section" value="{{ bundle.current_section.index | plus: -1 }}" />
+            <button type="submit" class='previousBtn'>Previous</button>
+            {% end_section_switch_form %}
+            {% endif %}
+
+        </div>
+        <div class='middle'>VIEW ORDER CONTENTS ({{ bundle.content.items.size }})</div>
+        <div class='right'>
+            {% if bundle.has_next_section %}
+            {% section_switch_form %}
+            <input type="hidden" name="section" value="{{ bundle.current_section.index | plus: 1 }}" />
+            <button type="submit" class='noCanToNextNtn{%if canNext>=1%} toNextBtn{%endif%}'>Next</button>
+            {% end_section_switch_form %}
+            {% else%}
+            {% add_to_cart_form %}
+            {% if bundle.subscription_type == 'optional' and bundle.subscription_frequencies.size > 0 %}
+            <label>
+                <input type="radio" name="subscription-enabled" value="0" />
+                One-time purchase
+            </label>
+            <label>
+                <input type="radio" name="subscription-enabled" value="1" />
+                Subscribe
+            </label>
+            {% endif %}
+            {% if bundle.subscription_type == 'required' or bundle.subscription_enabled %}
+            {% for frequency in bundle.subscription_frequencies %}
+            <ul>
+                <li>
+                    <label>
+                        <input type="radio" name="subscription-frequency" value="{{ frequency.id }}" />
+                        {{ frequency.frequency }} {{ frequency.unit }}
+                    </label>
+                </li>
+            </ul>
+            {% endfor %}
+            Email: <input type="email" required name="subscription-email" value="{{ settings.subscription_email }}" />
+            {% endif %}
+            <button type="submit" {% unless bundle.can_add_to_cart %} disabled="disabled" {% endunless %}
+                class='canAddToCart {% unless bundle.can_add_to_cart %}noCanAddToCart{% endunless %}'>
+                {% if bundle.adding_to_cart %}
+                Processing...
+                {% else %}
+                ADD ORDER TO CART
+                {% endif %}
+            </button>
+            {% end_add_to_cart_form %}
+            {% endif %}
+        </div>
+    </div>
+
+    <div id='setBundleModel'>
+        <div class='bundleModelContent'>
+            <img class='closeIcon'
+                src="//cdn.shopifycdn.net/s/files/1/0559/5788/1006/files/closeViewModel_110x.png?v=1637201957"
+                alt='close' />
+
+            {% if bundle.content.items.size == 0 %}
+            <span class='nullProdeucts'>You haven't chosen any products.</span>
+            {% else %}
+            {% for item in bundle.content.items %}
+            <div class="productItem">
+                <div class="productItemFirst">
+                    <div class='itemLeft'>
+                        {% if item.variant.product.image.src%}
+                        <img src="{{ item.variant.product.image.src }}" />
+                        {%else%}
+                        <div class="childBox">
+                        </div>
+                        {%endif%}
+                    </div>
+                    <div class='itemRight'>
+                        <div class="itemRightTop">{{item.variant.product.title }}</div>
+                        <div class="itemRightBottom">{{ item.variant.price | money }}</div>
+                    </div>
+                </div>
+                <div class="productItemLast">
+                    <div class='productItemLastTop'>
+                        X 1
+                    </div>
+                    <div class='productItemLastBottom'>
+                        {% unless item.is_required %}
+                        {% remove_from_bundle_form item %}
+                        <button type="submit">Remove</button>
+                        {% end_remove_from_bundle_form %}
+                        {% endunless %}
+                    </div>
+                </div>
+            </div>
+            {%endfor%}
+
+            {% endif %}
+        </div>
+        <div class='mobileFixedBtn'>
+            <div class='mobileFixedBtnCountant'>
+                <div>
+                    {% if bundle.has_prev_section %}
+                    {% section_switch_form %}
+                    <input type="hidden" name="section" value="{{ bundle.current_section.index | plus: -1 }}" />
+                    <button type="submit" class='previousBtn'>Previous</button>
+                    {% end_section_switch_form %}
+                    {% endif %}
+                </div>
+                <div>
+                    {% if bundle.has_next_section %}
+                    {% section_switch_form %}
+                    <input type="hidden" name="section" value="{{ bundle.current_section.index | plus: 1 }}" />
+                    <button type="submit" class='noCanToNextNtn{%if canNext>=1%} toNextBtn{%endif%}'>Next</button>
+                    {% end_section_switch_form %}
+                    {% else%}
+                    {% add_to_cart_form %}
+                    {% if bundle.subscription_type == 'optional' and bundle.subscription_frequencies.size > 0 %}
+                    <label>
+                        <input type="radio" name="subscription-enabled" value="0" />
+                        One-time purchase
+                    </label>
+                    <label>
+                        <input type="radio" name="subscription-enabled" value="1" />
+                        Subscribe
+                    </label>
+                    {% endif %}
+                    {% if bundle.subscription_type == 'required' or bundle.subscription_enabled %}
+                    {% for frequency in bundle.subscription_frequencies %}
+                    <ul>
+                        <li>
+                            <label>
+                                <input type="radio" name="subscription-frequency" value="{{ frequency.id }}" />
+                                {{ frequency.frequency }} {{ frequency.unit }}
+                            </label>
+                        </li>
+                    </ul>
+                    {% endfor %}
+                    Email: <input type="email" required name="subscription-email"
+                        value="{{ settings.subscription_email }}" />
+                    {% endif %}
+                    <button type="submit" {% unless bundle.can_add_to_cart %} disabled="disabled" {% endunless %}
+                        class='canAddToCart {% unless bundle.can_add_to_cart %}noCanAddToCart{% endunless %}'>
+                        {% if bundle.adding_to_cart %}
+                        Processing...
+                        {% else %}
+                        ADD ORDER TO CART
+                        {% endif %}
+                    </button>
+                    {% end_add_to_cart_form %}
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

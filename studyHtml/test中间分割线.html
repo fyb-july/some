@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    .founder_stories{
+        position: relative;
+        padding-left: 10%;
+    }
+    .founder_stories::before{
+        content: '';
+        position: absolute;
+        display: block;
+        width: calc(10% - 24px);
+        height: 1px;
+        top: 8px;
+        left: 0;
+        z-index: 0;
+        background: #B7B3B3;
+        color: var(--button-text-color,#fff);
+    }
+    .founder_stories::after{
+        content: '';
+        position: absolute;
+        display: block;
+        width: calc(50% - 24px);
+        height: 1px;
+        top: 8px;
+        left: calc(15% + 16px);
+        z-index: 0;
+        background: #B7B3B3;
+        color: var(--button-text-color,#fff);
+    }
+  
+</style>
+<body>
+    <div class='founder_stories'>
+        founder stories
+    </div>
+</body>
+</html>

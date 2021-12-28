@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <body>
+    <div id="player"></div>
+
+    <script>
+      // 创建script标签，通过src引入官方API，然后插入
+      var tag = document.createElement('script');
+      tag.src = "https://www.youtube.com/iframe_api";
+      var firstScriptTag = document.getElementsByTagName('script')[0];
+      firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+      //  上面API引入后就会自动执行下面onYouTubeIframeAPIReady函数
+      //   并赋值给全局对象player，在全局就可以通过player来调用API方法了
+      var player;
+      function onYouTubeIframeAPIReady() {
+        player = new YT.Player('player', {
+          height: '360',
+          width: '640',
+          videoId: 'XrPJlTUrbSI',
+          //  playerVars  里可以自定义播放器参数
+          playerVars: {
+              autoplay: 1,
+              loop: 1,
+              playlist: ['XrPJlTUrbSI']  //  playlist添加VIDEO_ID进行循环播放
+          },
+          // events 监听常见的回调事件
+          events: {
+            'onReady': onPlayerReady
+          }
+        });
+      }
+      
+      function onPlayerReady(event) {
+        event.target.playVideo();
+      }
+    </script>
+  </body>
+</html>
+
+作者：chang辰
+链接：https://juejin.cn/post/6844903998059708424
+来源：稀土掘金
+著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。

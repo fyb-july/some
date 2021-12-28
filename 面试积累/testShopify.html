@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    img{
+        width: 100px;
+        height: 100px;
+        border-radius:50%;
+    }
+    .img{
+        width: 150px;
+        height: 150px;
+        border-radius:50%;
+    }
+    #test:nth-child(){
+        width: 400px;
+        height: 200px;
+        border: 1px solid #161616;
+        text-decoration: underline;
+
+    }
+    a{
+        text-decoration: none;
+    }
+    .mobileFixedBtn{
+        display: flex;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        height: 112px;
+        background: #FFFFFF;
+        box-shadow: 0px -1px 10px 4px rgba(0, 0, 0, 0.05);
+        padding: 16px 26px;
+    }
+</style>
+<body>
+    <div id='test'>
+        <a href="">111</a>
+        <img src="./img/1.png" alt="">
+        <img class="img" src="./img/2.png" alt="">
+        <img src="./img/3.png" alt="">
+    </div>
+    <script>
+       var test1=document.getElementById('test1')
+       if(test1){
+        test1.onclick=()=>{
+           console.log(11)
+       }
+       }
+       const bunduleShowTips=()=>{
+        var skipBtn=document.getElementsByClassName('skipBtn')
+        var skipModel=document.getElementById('skipModel')
+        var closeSkipModel=document.getElementsByClassName('skipCloseIcon')
+        var agreeToPurchase=document.getElementsByClassName('AgreeToPurchase')
+        var oppositionToPurchase=document.getElementsByClassName('OppositionToPurchase')
+        var agreeToPurchaseCircle=document.getElementById('AgreeToPurchaseCircle')
+        var oppositionToPurchaseCircle=document.getElementById('OppositionToPurchaseCircle')
+        var agreeToPurchaseCircleText=document.getElementsByClassName('AgreeToPurchaseCircleText')
+        var oppositionToPurchaseCircleText=document.getElementsByClassName('OppositionToPurchaseCircleText')
+        if(agreeToPurchase[0]){
+            agreeToPurchase[0].onclick=()=>{
+                agreeToPurchaseCircle.style.background='#0B090A'
+                oppositionToPurchaseCircle.style.background='#B7B3B3'
+                agreeToPurchaseCircleText[0].style.color='#0B090A'
+                oppositionToPurchase[0].style.border='2px solid #B7B3B3'
+                oppositionToPurchaseCircleText[0].style.color='#B7B3B3'
+                agreeToPurchase[0].style.border='2px solid #0B090A'
+            }
+            oppositionToPurchase[0].onclick=()=>{
+                agreeToPurchaseCircle.style.background='#B7B3B3'
+                oppositionToPurchaseCircle.style.background='#0B090A'
+                agreeToPurchaseCircleText[0].style.color='#B7B3B3'
+                oppositionToPurchase[0].style.border='2px solid #0B090A'
+                oppositionToPurchaseCircleText[0].style.color='#0B090A'
+                agreeToPurchase[0].style.border='2px solid #B7B3B3'
+            }
+        }
+
+       }
+      
+
+       src="//cdn.shopifycdn.net/s/files/1/0559/5788/1006/files/expand_icon_3x_2b879e58-3603-489c-a0fb-c2995fd7e16f_110x.png?v=1637120661"
+        console.log('The Most Versatile Smart Fitness Device'.toUpperCase())
+    </script>
+</body>
+</html>

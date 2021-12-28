@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        mark {
+            background-color: blue;
+            color: white;
+        }
+        
+    </style>
+</head>
+<body>
+    <!-- code标签 -->
+    <p>Regular text. <code>This is code.</code> Regular text.</p>
+   
+    <!-- progress标签  -->
+    <progress id="file" max="100" value="70"> 70% </progress>
+
+    <!-- output标签 -->
+    <form oninput="result.value=parseInt(a.value)+parseInt(b.value)">
+        <input type="range" name="b" value="50" /> +
+        <input type="number" name="a" value="10" /> =
+        <output name="result"></output>
+    </form>
+    <!-- demo标签 -->
+    <p>&lt;mark&gt; 元素用于 <mark>高亮</mark> 文本</p>
+    <div>
+        <ul class='ul'>
+            <li>1</li>
+            <li>2</li>
+            <li>2</li>
+        </ul>
+    </div>
+</body>
+</html>

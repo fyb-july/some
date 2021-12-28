@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text" id='ipt'>
+    <div id="div"></div>
+    <input type="text" id='ipt1'>
+</body>
+<script>
+    var num=0
+    var ipt=document.getElementById('ipt')
+    var div=document.getElementById('div')
+    div.innerHTML=num
+    ipt.value=num
+    ipt.onkeydown=function (e){
+        num=e.target.value
+        div.innerHTML=num
+    }
+    ipt.onchange=function (e){
+        num=e.target.value
+        ipt.value=num
+    }
+    // const timer=setInterval(()=>{
+    //     clearInterval(timer)
+    //     console.log(11)
+    // },100)
+    // const timer1=setInterval(()=>{
+    //     console.log(22)
+    // },100)
+    // console.log(timer,timer1)
+   
+</script>
+</html>

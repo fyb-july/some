@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    .father{
+        background-color: #ccc;
+        max-width: 1440px;
+        height: 200px;
+        margin: 0 auto;
+        position: relative;
+        overflow: hidden;
+    }
+    .child{
+        width: 200px;
+        height: 200px;
+        border-radius: 50%;
+        position: absolute;
+        left: 0;
+        top:0;
+        background-color: bisque;
+    }
+    .child:nth-of-type(2){
+        background-color: blue;
+       
+        }
+    .child:nth-of-type(3){
+    background-color: red;
+   
+    }
+    .child:nth-of-type(4){
+    background-color: yellow;
+   
+    }
+    .child:nth-of-type(5){
+    background-color: gold;
+   
+    }
+    .child:nth-of-type(6){
+    background-color: black;
+    }
+    .child:nth-of-type(7){
+    background-color: green;
+    }
+    @media only screen and (max-width: 590px){
+        .child{
+        width: 100px;
+        height: 100px;
+    }
+    }
+</style>
+<body>
+    <div class='father'><div class='child'></div><div class='child'></div><div class='child'></div><div class='child'></div><div class='child'></div><div class='child'></div><div class='child'></div>
+    </div>
+    <iframe src="https://cdn.forms-content.sg-form.com/882b0499-4c27-11ec-9a86-7a2573c19e87"/>
+    <script>
+        var children=document.getElementsByClassName('child')
+        var childrenWidth=children[0].clientWidth
+        var timer;
+        for(var j=1;j<children.length+1;j++){
+            children[j-1].style.left=(1440-j*childrenWidth)-(j-1)*childrenWidth/100*16+'px'
+           
+        }
+        var min =100
+        clearInterval()
+        timer=setInterval(()=>{
+            for(var i=0;i<children.length;i++){
+            children[i].style.left=parseFloat(children[i].style.left)+1+'px'
+            if(children[i].style.left==(1440+'px')){
+                for(var k=0;k<children.length;k++){
+                    min=Math.min(parseFloat(children[k].style.left),min)
+                }
+                children[i].style.left=min-(childrenWidth+childrenWidth/100*16)+'px'
+                min=100
+            }
+            }
+        },20)
+    </script>
+</body>
+</html>

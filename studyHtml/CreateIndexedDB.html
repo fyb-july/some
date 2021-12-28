@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 数据库数据结果
+        var db;
+        // 打开数据库
+        var DBOpenRequest = window.indexedDB.open('project', 1);
+        // 数据库打开成功后
+        DBOpenRequest.onsuccess = function (event) {
+            // 存储数据结果
+            db = DBOpenRequest.result;
+            // 做其他事情...
+        };
+        // 下面事情执行于：数据库首次创建版本，或者window.indexedDB.open传递的新版本（版本数值要比现在的高）
+        DBOpenRequest.onupgradeneeded = function (event) {
+            // 通常对主键，字段等进行重定义，具体参见demo
+            var db = event.target.result;
+            console.log(event)
+            // 创建一个数据库存储对象
+            var objectStore = db.createObjectStore('test', {
+                keyPath: 'id',
+                autoIncrement: true
+            });
+            // 定义存储对象的数据项
+            objectStore.createIndex('id', 'id', {
+                unique: true
+            });
+            objectStore.createIndex('name', 'name');
+            objectStore.createIndex('begin', 'begin');
+            objectStore.createIndex('end', 'end');
+            objectStore.createIndex('person', 'person');
+            objectStore.createIndex('remark', 'remark');
+        };
+    </script>
+</body>
+
+</html>

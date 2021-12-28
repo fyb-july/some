@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    .father{
+        background-color: #161616;
+        width: 300px;
+        height: 500px;
+        
+    }
+    .con{
+        position: relative;
+        overflow: hidden;
+        height: 400px;
+        width: 300px;
+        margin-top: 50px;
+    }
+    .child:nth-child(1){
+        position: absolute;
+        background-color: red;
+        border-radius: 50%;
+        transition: left .3s,height .3s,width .3s,top .3s;
+    }
+    .child:nth-child(2){
+        position: absolute;
+        background-color: blue;
+        border-radius: 50%;
+        transition: left .3s,height .3s,width .3s,top .3s;
+    }
+    .child:nth-child(3){
+        position: absolute;
+        background-color: white;
+        border-radius: 50%;
+        transition: left .3s,height .3s,width .3s,top .3s;
+    }
+    .child:nth-child(4){
+        position: absolute;
+        background-color: yellow;
+        border-radius: 50%;
+        transition: left .3s,height .3s,width .3s,top .3s;
+    }
+    .child:nth-child(5){
+        position: absolute;
+        background-color: yellowgreen;
+        border-radius: 50%;
+        transition: left .3s,height .3s,width .3s,top .3s;
+    }
+</style>
+<body>
+    <div class='father' >
+        <div class="con">
+            <div class="child" style="top:0;left:50px;width:100px;height: 100px;margin: -40px 0 0 0;">1</div>
+            <div class="child" style="top:140px;left:150px;width:150px;height: 150px; margin: 0;">2</div>
+            <div class="child" style="top:350px;left:50px;width:100px;height: 100px;margin: 0;">3</div>
+            <div class="child" style="top:245px;left:0px;width:100px;height: 100px;margin: 0 0 0 -100px;">4</div> 
+            <div class="child" style="top:75px;left:0px;width:100px;height: 100px;margin: 0 0 0 -100px;">4</div>
+        </div>
+    </div>
+</body>
+<script>
+    const re=()=>{
+        var children=document.getElementsByClassName('child')
+        console.log(children)
+        setInterval(()=>{
+            let left=children[0].style.left
+            let top=children[0].style.top
+            let height=children[0].style.height
+            let width=children[0].style.width
+            let margin=children[0].style.margin
+            for(var i=0;i<=4;i++){
+                if(i!==4){
+                    children[i].style.left= children[i+1].style.left 
+                    children[i].style.top= children[i+1].style.top
+                    children[i].style.width= children[i+1].style.width
+                    children[i].style.height= children[i+1].style.height
+                    children[i].style.margin= children[i+1].style.margin
+                }else{
+                    children[4].style.left= left
+                    children[4].style.top= top
+                    children[4].style.width= height
+                    children[4].style.height= width
+                    children[4].style.margin= margin
+                }
+            }
+        },2000)
+    }
+    re()
+</script>
+</html>

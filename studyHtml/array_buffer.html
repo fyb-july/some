@@ -1,0 +1,29 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+       var buffer = new ArrayBuffer(16);
+       if (buffer.byteLength === 16) {
+        console.log("Yes, it's 16 bytes.");
+        } else {
+        console.log("Oh no, it's the wrong size!");
+        }
+        var int32View = new Int32Array(buffer);
+        console.log(int32View.length)
+        // for (var i = 0; i < int32View.length; i++) {
+        // int32View[i] = i * 2;
+        // }
+        console.log(buffer)
+        console.log(int32View)
+        // 如果可以，我想看看一年前自己刚到深圳的样子。
+        // 一瞬间信仰崩塌，
+    </script>
+</body>
+</html>

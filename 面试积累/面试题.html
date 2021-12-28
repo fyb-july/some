@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+    <style>
+        .div{
+            width: 100%;
+            height: 100px;
+            display: flex;
+        }
+        div{
+            flex:1 1;
+            pointer-events: none;
+        }
+    </style>
+<body>
+    <div class="div" style="background-color: red;">
+        <div>11</div>
+        <div>222</div>
+    </div>
+      <!-- 自我介绍：
+        面试官你好，我叫方一波，毕业于江西理工大学软件工程，
+        之前在20年7月到现在在深圳动米智能科技有限公司担任软件工程师，
+        在工作中用到了react和flutter的技术栈，主要开发的项目有两个web项目和一个flutter项目
+        同时协助算法开发工程师协助开发一些辅助工具
+        今天来面试贵公司的前端开发工程师。
+
+        1，将项目由css重构成的less,在.d.ts定义为模块化,减少了样式全局影响。
+        2，配置文件文件路由系统,完成登录页面开发,采用ref对密码输入输入进行聚焦和失去焦点交互。
+        3，采用lazy()和Suspense,CDN加速对项目进行首页展示卡顿优化。
+        4，利用antd-upload进行文件上传，同时封装的上传的useUploadMedia自定义hooks，利用fileReader()做了图片本地预览。
+        5，完成上传头像的时候利用canvas结合鼠标的事件对图片进行裁剪，利用canvas的api,getImageData获取图片数据，用putImageData构造裁剪后的。
+        6，配置eslint,parser:'@typescript-eslint/parser',对部分ts解析支持,配置less-loader定义模块化导出less。
+        7，导入redux，配置单个模块采用单独的reducer在index进行combineReducer.
+        8，封装全局公用的Button组件，Model组件，Calendar组件，Lesson组件，声明全局公用的部分样式
+        9，完成项目各模块开发，在lesson模块里面采用redux状态管理，减少父子组件传值的props,采用react-beautful-dnd外部库来对拖拽项目处理。
+        10，在部分子组件采用了useMemo,useCallBack进行性能优化减少没必要的渲染。
+        11，采用forwordRef转发ref用ref.current来对数据进行保存。
+        12，增加数据获取触底加载 -->
+
+            <!-- 面试记录：
+            宏任务和微任务
+
+            Es5实现继承
+
+            判断一个数组的几种方法
+
+            react在setState之后做了什么？
+
+            浏览器内核
+            有Trident
+            Gecko
+            Presto
+            Webkit
+            Blink
+
+            10个hooks
+            useState
+            useEffect
+            useContext
+            useReducer
+            useCallback
+            useMemo
+            useRef
+            useImperativeHandle
+            useLayoutEffect
+            useDebugValue
+
+            react的生命周期
+            constructor
+            挂载阶段
+            * 1.componentWillMount
+            发生在 render 函数之前，还没有挂载 Dom
+            * 2.render
+            * 3.componentDidMount
+            更新阶段
+            更新阶段分为由 state 更新引起和 props 更新引起
+
+            * props
+            * 1. componentWillReceiveProps(nextProps,nextState)
+            这个生命周期主要为我们提供对 props 发生改变的监听，如果你需要在 props 发生改变后，相应改变组件的一些 state。在这个方法中改变 state 不会二次渲染，而是直接合并 state。
+            * 2. shouldComponentUpdate(nextProps,nextState)
+            这个生命周期需要返回一个 Boolean 类型的值，判断是否需要更新渲染组件，优化 react 应用的主要手段之一，当返回 false 就不会再向下执行生命周期了，在这个阶段不可以 setState()，会导致循环调用。
+            * 3. componentWillUpdate(nextProps,nextState)
+            这个生命周期主要是给我们一个时机能够处理一些在 Dom 发生更新之前的事情，如获得 Dom 更新前某些元素的坐标、大小等，在这个阶段不可以 setState()，会导致循环调用。
+            **一直到这里 this.props 和 this.state 都还未发生更新**
+            * 4. render
+            执行 render 函数。
+            * 5. componentDidUpdate(prevProps, prevState)
+            在此时已经完成渲染，Dom 已经发生变化，State 已经发生更新，prevProps、prevState 均为上一个状态的值。
+            * state（具体同上）
+            * 1. shouldComponentUpdate
+            * 2. componentWillUpdate
+            * 3. render
+            * 4. componentDidUpdate
+            componentWillUnmount
+            7层网络
+            Layer 7：应用层（Application Layer）
+            Layer 6：表示层（Presentation Layer）
+            Layer 5：会话层（Session Layer）
+            Layer 4：传输层（Transport Layer）
+            Layer 3：网络层（Network Layer）
+            Layer 2：数据链路层（Data Link Layer）
+            Layer 1：物理层（Physical Layer） -->
+</body>
+<script>
+    const a = Promise.resolve(42)
+    const b=new Promise(
+        resolve= ()=>{
+            42
+    })
+   
+</script>
+
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        (async () => {
+            const aa = await (() => {
+                return new Promise(function (resolve, reject) {
+                    console.log(111)
+                    setTimeout(() => {
+                        console.log(111)
+                        resolve(() => { })
+                    }, 2000);
+                })
+            })()
+            console.log(aa.resolve())
+        })()
+
+        const arr = [{ a: 1 }, { a: 2 }, { a: 3 }, { a: 5 }]
+        let a = 0
+        console.log(arr.reduce((total, curr, idx, arr) => {
+            if (idx === 1) {
+                a = total.a + curr.a
+            } else {
+                a += curr.a
+            }
+            return a
+        }))
+    </script>
+</body>
+
+</html>

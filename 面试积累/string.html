@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    .father{
+        display: flex;
+        justify-content: space-between;
+    }
+    div{
+        flex: 2 1;
+    }
+</style>
+<body>
+    <div class="father">
+        <div>11</div>
+        <div>11</div>
+    </div>
+   
+    <script>
+            const str=(strs)=>{
+                for(var i=strs[0].length-1;i>=0;i--){
+                    const s=str[0].slice(0,i)
+                    for(var j=0;j<strs.length;j++){
+                        const k=str[j].slice(0,i)
+                        if(s!==k){
+                            break
+                        }
+                    }
+                    return s
+                }
+            }
+            console.log(str(['aaaa','abbb','acccc']))
+    </script>
+</body>
+</html>

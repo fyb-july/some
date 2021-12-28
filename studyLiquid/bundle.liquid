@@ -1,0 +1,494 @@
+<style type="text/css">
+     .mirrorFather{
+        display: flex;
+        justify-content: space-around;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+  	 @media screen and (min-width:589px){
+        .mirrorTopProgress{
+            margin-top: 16px;
+            padding-bottom: 30px;
+            border-bottom: 1px solid #D3D3D3;
+         }
+        .mirrorFather{
+         height: 160px;
+        display: flex;
+        justify-content: space-around;
+        flex-direction: row;
+        align-items: flex-start;
+         margin-bottom:40px;
+    }
+    }
+    .product-box {
+        display: flex;
+    }
+    .product {
+        display: flex;
+        flex-direction: column;
+    }
+    .note-field--container {
+        display: flex;
+        flex-direction: column;
+    }
+   .mirrorTitle{
+        font-style: normal;
+        font-weight: bold;
+        font-size: 24px;
+        line-height: 32px;
+        text-align: center;
+        text-transform: uppercase;
+        margin-top: 24px;
+    }
+   .mirrorTopProgress{
+        margin-top: 8px;
+     	 padding-bottom: 20px;
+    }
+  .mirrorTopProgress ul{
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: table;
+        table-layout: fixed;
+        width: 100%;
+        font-size: 1.5em;
+        z-index: 0;
+        position: relative;
+      
+    }
+    .mirrorTopProgress ul li {
+        position: relative;
+        display: table-cell;
+        text-align: center;
+        font-size: 14px;
+        outline-color:#000;
+    }
+    .mirrorTopProgress ul li::before{
+        content: attr(data-step);
+    display: block;
+    margin: 0 auto;
+    width: 16px;
+    height: 16px;
+    text-align: center;
+    margin-bottom: 0.25em;
+    line-height: 16px;
+    border-radius: 50%;
+    position: relative;
+    z-index: 1000;
+    cursor: pointer;
+    box-shadow: 0 0 0 0 var(--button-text-color,#fff) inset;
+    transition: box-shadow .5s ease;
+    border: 2px solid #B7B3B3;
+    box-sizing: border-box;
+    color: var(--button-text-color,#fff);
+    }
+    .mirrorTopProgress ul li:nth-of-type(1):after,.mirrorTopProgress ul li:nth-of-type(2):after{
+        content: '';
+        position: absolute;
+        display: block;
+        width: calc(100% - 16px);
+        height: 1px;
+        top: 8px;
+        left: calc(50% + 8px);
+        z-index: 0;
+        background: #B7B3B3;
+        color: var(--button-text-color,#fff);
+    }
+   
+    .grayColor{
+        font-weight: bold;
+        font-size: 16px;
+        line-height: 24px;
+        color: #B7B3B3;
+    }
+    .grayColor span{
+        display: block; 
+    }
+    .blackColor{
+        color: #0B090A;
+    }
+    .redColor{
+        color: #F42829;
+    }
+   .contanier{
+     	min-height:520px;
+        max-width: 1300px;
+        margin: 24px auto 0;
+    }
+   
+    .mirrorFather .child1{
+        flex: 1;
+    }
+    .childBox{
+        width: 160px;
+        height: 160px;
+        background-color: #ccc;
+        border-radius: 8px;
+    }
+  .child1 img{
+    	 width: 160px;
+        height: 160px;
+        border-radius: 8px;
+  }
+    .mirrorFather .child2{
+        flex: 2;
+    }
+    .mirrorFather .child3{
+        flex: 1;
+      	 display:flex;
+       justify-content: space-around;
+        align-items: flex-start;
+    }
+  .mirrorAddBtn{
+    width: 180px;
+	height: 44px;
+    border: 2px solid #F56A6D;
+    box-sizing: border-box;
+    border-radius: 40px;
+    text-align: center;
+  }
+  .redMirrorAddBtn{
+     width: 180px;
+	height: 44px;
+	background:#F42829;
+    box-sizing: border-box;
+    border-radius: 40px;
+    text-align: center;
+    color:#FFF;
+    
+  }
+  .childTop,.childBottom{
+   flex:1;
+  }
+  .setBtnBorder{
+    width: 92px;
+	height: 32px;
+    border: 1px solid #0B090A;
+	box-sizing: border-box;
+	border-radius: 8px;
+    text-align: center;
+    margin-top:6px;
+  }
+  .mirrorBottomFixed{
+    padding-bottom:20px;
+    max-width:1300px;
+    margin:0 auto;
+    display:flex;
+  }
+  .mirrorBottomFixed>div{
+  
+    flex:1;
+  }  
+  .mirrorBottomFixed .left{
+    	text-align: left;
+  }
+   .mirrorBottomFixed .middle{
+ 		 text-align: center;
+  } 
+  .mirrorBottomFixed .right{
+    	text-align: right;
+  }
+  .previousBtn{
+    width: 240px;
+	height: 44px;
+    border: 2px solid #0B090A;
+	box-sizing: border-box;
+	border-radius: 5px;
+  }
+  .toNextBtn{
+    color:#fff;
+    width: 240px;
+	height: 44px;
+    background: #0B090A;
+	border-radius: 5px;
+  }
+  #bundleModel{
+    display:none;
+    position:fixed;
+    top:20%;
+    left:20%;
+     max-width:992px;
+  }
+</style>
+
+<script type="text/javascript">
+  const showProductModel=()=>{
+    var showViewModel=document.getElementsByClassName('middle')
+    var bundleModel=document.getElementById('bundleModel')
+    if(showViewModel[0]){
+      showViewModel[0].onclick=()=>{
+        bundleModel.style.display='block'
+      }
+    }
+  }
+  showProductModel()
+const selectedVariants = new Map();
+
+function setAddDisabled(form) {
+    const variantId = form.querySelector('[name="variant"]').value;
+    const sectionId = form.querySelector('[name="section"]').value;
+    const canAdd = window.BundleBuilder.canAddVariant(variantId, sectionId);
+    form.querySelector('[type="submit"]').disabled = !canAdd;
+}
+
+
+/* Change variant price after variant change */
+Array.prototype.forEach.call(
+    document.querySelectorAll('.bundle-builder--add-to-bundle-form select[name="variant"]'),
+    function (select) {
+        select.addEventListener('change', function (e) {
+            const variantId = e.target.value;
+            selectedVariants.set(e.target.id, variantId);
+            const price = e.target.querySelector('option[value="' + variantId + '"]').dataset.price;
+            e.target.parentNode.querySelector('.variant-price').textContent = price;
+
+           const form = e.target.parentElement;
+           setAddDisabled(form);
+        });
+    }
+);
+
+
+function render() {
+    selectedVariants.forEach(function (variantId, selectId) {
+        const select = document.getElementById(selectId);
+        if (select) {
+            select.value = variantId;
+        }
+    });
+    Array.prototype.forEach.call(
+        document.querySelectorAll('.bundle-builder--add-to-bundle-form'),
+        setAddDisabled,
+    );
+}
+/* Change variant to what was selected last */
+document.body.addEventListener('bundlebuilder:render', render);
+render()
+ 
+</script>
+{% if bundle.published %}
+	 <div class='mirrorTitle'>PURCHASE MIRROR</div>
+	 <div class='mirrorTopProgress'>
+        <ul>
+            <li><a class="grayColor redColor">STEP1:<span class='blackColor'>SELECT YOUR DEVICE</span></a></li>
+            <li><a class="grayColor">STEP2:<span>SELECT MEMBERSHIP</span></a></li>
+            <li><a class="grayColor">STEP3:<span>SELECT INSTALLATION SERVICE</span></a></li>
+        </ul>
+    </div>
+	 <div class="contanier">
+       	 {% for product in bundle.current_section.products %}
+       			 <div class='mirrorFather'>
+                  <div class="child1">
+                    {%-if product.image.src-%}
+                     <img src="{{ product.image.src }}" />
+                    {%-else-%}
+                      <div class="childBox">
+                      </div>
+                     {%-endif-%}
+                  </div>
+                  <div class="child2">
+                   		 <h5>{{product.title}}</h5>
+                      	 <h5 class="variant-price">{{ product.available_variants[0].price | money }}</h5>
+                  </div>
+                  <div class="child3">
+                    <div class='childTop'>
+                      	{% for variant in product.variants_in_bundle %}
+                          {% change_quantity_form %}
+                      		<div class='setBtnBorder'>
+                                <input type="hidden" name="variant" value="{{ variant.id }}" />
+                                <input type="hidden" name="section" value="{{ bundle.current_section.index }}" />
+                                <button type="submit" name="remove">-</button>
+                                    {{ variant.count }}
+                                <button type="submit" name="add">+</button>
+                      		</div>
+                            
+                          {% end_change_quantity_form %}
+                       {% endfor %}
+                    </div>
+                    <div class='childBottom'>
+                      	 {% add_to_bundle_form bundle.current_section %}
+                            {% if product.available_variants.size > 1 %}
+                                <select name="variant" id="select-{{ bundle.current_section.index }}-{{ product.id }}">
+                                    {% for variant in product.available_variants %}
+                                        <option value="{{ variant.id }}" data-price={{ variant.price | money }}>
+                                            {{ variant.title }}{% if variant.available_count %} (available: {{ variant.available_count }}){% endif %}
+                                        </option>
+                                    {% endfor %}
+                                </select>
+                            {% else %}
+                                <input type="hidden" name="variant" value="{{ product.available_variants[0].id }}" />
+                               {% if product.available_variants[0].available_count %} (available: {{ product.available_variants[0].available_count }}){% endif %}
+                            {% endif %}
+                      		 <button type="submit" class='mirrorAddBtn'> ADD{{variantNum}}</button>
+                        {% end_add_to_bundle_form %}  
+                    </div>
+						
+                  </div>
+              </div>
+       	 {% endfor %}
+    </div>
+   	<div class='mirrorBottomFixed'>
+      	<div class='left'>
+   
+             {% if bundle.has_prev_section %}
+              {% section_switch_form %}
+                  <input type="hidden" name="section" value="{{ bundle.current_section.index | plus: -1 }}" />
+                  <button type="submit" class='previousBtn'>Previous</button>
+              {% end_section_switch_form %}
+         	 {% endif %}
+          
+      </div>
+      	<div class='middle'>View order Contents ({{ bundle.content.items.size }})</div>
+      	<div class='right'>
+           {% if bundle.has_next_section %}
+              {% section_switch_form %}
+                  <input type="hidden" name="section" value="{{ bundle.current_section.index | plus: 1 }}" />
+                  <button type="submit" class='toNextBtn'>Next</button>
+              {% end_section_switch_form %}
+          {% endif %}
+      </div>
+	</div>
+
+	<div id='bundleModel'>
+         <div class="bundle-content">
+        {% if bundle.content.items.size == 0 %}
+            <span>You haven't chosen any products.</span>
+        {% else %}
+            <table>
+                <tr>
+                    <th>Product</th>
+                    <th>Variant</th>
+                    <th>Section</th>
+                    <th>Price</th>
+                    <th></th>
+                </tr>
+                {% for item in bundle.content.items %}
+                    <tr>
+                        <td>{{ item.variant.product.title }}</td>
+                        <td>{{ item.variant.title }}</td>
+                        <td>{{ item.section.name }}</td>
+                        <td>{{ item.variant.price | money }}</td>
+                        <td>
+                            {% unless item.is_required %}
+                                {% remove_from_bundle_form item %}
+                                    <button type="submit">Remove</button>
+                                {% end_remove_from_bundle_form %}
+                            {% endunless %}
+                        </td>
+                    </tr>
+                {% endfor %}
+                {% if bundle.content.price < bundle.content.compare_at_price %}
+                    <tr>
+                        <th colspan="3">Discount</th>
+                        <th>
+                            <span>{{ bundle.content.price | minus: bundle.content.compare_at_price | money }}</span>
+                        </th>
+                        <th></th>
+                    </tr>
+                {% endif %}
+                <tr>
+                    <th colspan="3">Total</th>
+                    <th>
+                        <span>{{ bundle.content.price | money }}</span>
+                    </th>
+                    <th></th>
+                </tr>
+            </table>
+
+            {% if settings.note_enabled %}
+                <div class="note-field--container">
+                    <label>{{ settings.note_label }}{% if settings.note_required %} (required){% endif %}</label>
+                    {% note_field %}{{ settings.note_text }}{% end_note_field %}
+                </div>
+                {% if settings.note_prompt_visible %}
+                    <div class="note-field--error-message">
+                        <p>Note required before adding to cart.</p>
+                    </div>
+                {% endif %}
+            {% endif %}
+
+            {% add_to_cart_form %}
+                {% if bundle.subscription_type == 'optional' and bundle.subscription_frequencies.size > 0 %}
+                    <label>
+                        <input type="radio" name="subscription-enabled" value="0" />
+                        One-time purchase
+                    </label>
+                    <label>
+                        <input type="radio" name="subscription-enabled" value="1" />
+                        Subscribe
+                    </label>
+                {% endif %}
+                {% if bundle.subscription_type == 'required' or bundle.subscription_enabled %}
+                    {% for frequency in bundle.subscription_frequencies %}
+                        <ul>
+                            <li>
+                                <label>
+                                    <input type="radio" name="subscription-frequency" value="{{ frequency.id }}" />
+                                    {{ frequency.frequency }} {{ frequency.unit }}
+                                </label>
+                            </li>
+                        </ul>
+                    {% endfor %}
+                    Email: <input type="email" required name="subscription-email" value="{{ settings.subscription_email }}" />
+                {% endif %}
+                <button type="submit"{% unless bundle.can_add_to_cart %} disabled="disabled"{% endunless %}>
+                    {% if bundle.adding_to_cart %}
+                        Processing...
+                    {% else %}
+                        Add products to cart
+                    {% endif %}
+                </button>
+            {% end_add_to_cart_form %}
+        {% endif %}
+    </div>
+	</div>
+ 
+{% else %}
+    <p>Sorry, these products are currently unavailable.</p>
+{% endif %}
+{% comment %} 添加到购物车 {% endcomment %}
+  {% if settings.note_enabled %}
+                <div class="note-field--container">
+                    <label>{{ settings.note_label }}{% if settings.note_required %} (required){% endif %}</label>
+                    {% note_field %}{{ settings.note_text }}{% end_note_field %}
+                </div>
+                {% if settings.note_prompt_visible %}
+                    <div class="note-field--error-message">
+                        <p>Note required before adding to cart.</p>
+                    </div>
+                {% endif %}
+            {% endif %}
+
+            {% add_to_cart_form %}
+                {% if bundle.subscription_type == 'optional' and bundle.subscription_frequencies.size > 0 %}
+                    <label>
+                        <input type="radio" name="subscription-enabled" value="0" />
+                        One-time purchase
+                    </label>
+                    <label>
+                        <input type="radio" name="subscription-enabled" value="1" />
+                        Subscribe
+                    </label>
+                {% endif %}
+                {% if bundle.subscription_type == 'required' or bundle.subscription_enabled %}
+                    {% for frequency in bundle.subscription_frequencies %}
+                        <ul>
+                            <li>
+                                <label>
+                                    <input type="radio" name="subscription-frequency" value="{{ frequency.id }}" />
+                                    {{ frequency.frequency }} {{ frequency.unit }}
+                                </label>
+                            </li>
+                        </ul>
+                    {% endfor %}
+                    Email: <input type="email" required name="subscription-email" value="{{ settings.subscription_email }}" />
+                {% endif %}
+                <button type="submit"{% unless bundle.can_add_to_cart %} disabled="disabled"{% endunless %}>
+                    {% if bundle.adding_to_cart %}
+                        Processing...
+                    {% else %}
+                        Add products to cart
+                    {% endif %}
+                </button>
+            {% end_add_to_cart_form %}
+        {% endif %}

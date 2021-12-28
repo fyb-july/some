@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    *{
+        padding: 0;
+        margin: 0;
+    }
+     .mirrorFather{
+        display: flex;
+        justify-content: space-around;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    @media screen and (min-width:589px){
+        
+        .mirrorTopProgress{
+        margin-top: 16px;
+        padding-bottom: 24px;
+        border-bottom: 1px solid #D3D3D3;
+         }
+         .grayColor{
+             display: block;
+         }
+         .mirrorFather{
+         height: 160px;
+        display: flex;
+        justify-content: space-around;
+        flex-direction: row;
+        align-items: flex-start;
+    }
+    }
+    .grayColor:nth-of-type(2){
+        display: none;
+    }
+     .mirrorTitle{
+        font-style: normal;
+        font-weight: bold;
+        font-size: 24px;
+        line-height: 32px;
+        text-align: center;
+        text-transform: uppercase;
+        margin-top: 24px;
+    }
+    .mirrorTopProgress{
+        margin-top: 8px;
+        padding-bottom: 20px;
+         }
+    .mirrorTopProgress ul{
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: table;
+        table-layout: fixed;
+        width: 100%;
+        font-size: 1.5em;
+        margin-bottom: 60px;
+        z-index: 0;
+        position: relative;
+      
+    }
+    .mirrorTopProgress ul li {
+        position: relative;
+        display: table-cell;
+        text-align: center;
+        font-size: 14px;
+        outline-color:#000;
+    }
+    .mirrorTopProgress ul li::before{
+    content: attr(data-step);
+    display: block;
+    margin: 0 auto;
+    width: 16px;
+    height: 16px;
+    text-align: center;
+    margin-bottom: 0.25em;
+    line-height: 16px;
+    border-radius: 50%;
+    position: relative;
+    z-index: 1000;
+    cursor: pointer;
+    box-shadow: 0 0 0 0 var(--button-text-color,#fff) inset;
+    transition: box-shadow .5s ease;
+    border: 2px solid #B7B3B3;
+    box-sizing: border-box;
+    color: var(--button-text-color,#fff);
+    }
+    .mirrorTopProgress ul li:nth-of-type(1):before{
+        margin-left: 15%;
+    }
+    .mirrorTopProgress ul li:nth-of-type(2):before{
+         margin: 0 auto;
+         margin-bottom: 0.25em;
+    }
+    .mirrorTopProgress ul li:nth-of-type(3):before{
+        margin-left: 70%;
+     }
+    .mirrorTopProgress ul li:nth-of-type(1):after,.mirrorTopProgress ul li:nth-of-type(2):after{
+        content: '';
+        position: absolute;
+        display: block;
+        width: calc(137.5% - 24px);
+        height: 1px;
+        top: 8px;
+        left: calc(15% + 16px);
+        z-index: 0;
+        background: #B7B3B3;
+        color: var(--button-text-color,#fff);
+    }
+    .mirrorTopProgress ul li:nth-of-type(2):after{
+        left: calc(50% + 8px);
+        width: calc(120% - 8px);
+    }
+    .grayColor{
+        font-weight: bold;
+        font-size: 16px;
+        line-height: 24px;
+        color: #B7B3B3;
+    }
+    .grayColor span{
+        display: block; 
+    }
+    .blackColor{
+        color: #0B090A;
+    }
+    .redColor{
+        color: #F42829;
+    }
+    .contanier{
+        max-width: 1300px;
+        margin: 24px auto 0;
+    }
+   
+    .mirrorFather .child1{
+        flex: 1;
+    }
+    .childBox{
+        width: 160px;
+        height: 160px;
+        background-color: blue;
+        border-radius: 8px;
+    }
+    .mirrorFather .child2{
+        flex: 2;
+    }
+ 
+    .productItem{
+        height:180px;
+        padding-bottom: 20px;
+        border-bottom: 0.5px solid #D3D3D3;
+        display: flex;
+        justify-content: space-around;
+    }
+    .productItem:nth-last-of-type(1){
+        border:none; 
+    }
+    .productItemFirst{
+        flex: 1;
+        text-align: left;
+    }
+    .productItemLast{
+        flex: 1;
+        text-align: right;
+    }
+   .itemLeft,.itemRight{
+       display: inline-block;
+   }
+   .itemLeft{
+       width: 160px;
+       height: 160px;
+       border-radius: 8px;
+       margin-right: 32px;
+       background-color: red;
+   }
+</style>
+<body>
+    <!-- <h1>{{ bundle.current_section.name }}</h1> -->
+    <!-- {% for product in bundle.current_section.products %}
+    <div class="product">
+        <h2>{{ product.title }}</h2>
+        <img src="{{ product.image.src }}" />
+        {% add_to_bundle_form bundle.current_section %}
+            {% if product.available_variants.size > 1 %}
+                <select name="variant" id="select-{{ bundle.current_section.index }}-{{ product.id }}">
+                    {% for variant in product.available_variants %}
+                        <option value="{{ variant.id }}" data-price={{ variant.price | money }}>
+                            {{ variant.title }}{% if variant.available_count %} (available: {{ variant.available_count }}){% endif %}
+                        </option>
+                    {% endfor %}
+                </select>
+            {% else %}
+                <input type="hidden" name="variant" value="{{ product.available_variants[0].id }}" />
+                {{ product.available_variants[0].title }}{% if product.available_variants[0].available_count %} (available: {{ product.available_variants[0].available_count }}){% endif %}
+            {% endif %}
+            <span class="variant-price">{{ product.available_variants[0].price | money }}</span>
+            <button type="submit">Add</button>
+        {% end_add_to_bundle_form %}
+       
+    </div>
+{% endfor %} -->
+    <div class='mirrorTitle'>PURCHASE MIRROR</div>
+
+    <div class='mirrorTopProgress'>
+        <ul>
+            <li><a class="grayColor redColor">Step1:<span class='blackColor'>Select Your Device</span></a></li>
+            <li><a class="grayColor">Step2:<span>Select Your Device</span></a></li>
+            <li><a class="grayColor">Step3:<span>Select Your Device</span></a></li>
+        </ul>
+    </div>
+    <div class="contanier">
+        <div class='mirrorFather'>
+            <div class="child1">
+                <div class="childBox">
+
+                </div>
+            </div>
+            <div class="child2">
+                <div>
+
+                </div>
+            </div>
+            <div class="child3">
+
+            </div>
+        </div>
+    </div>
+    <div class="productItem">
+        <div class="productItemFirst" >
+           <div class='itemLeft'>
+
+           </div >
+           <div class='itemRight'>
+            <div class="itemRightTop">111</div>
+            <div class="itemRightBottom">2222</div>
+            </div>
+        </div>
+        <div class="productItemLast" >
+            222
+        </div>
+    </div>
+    <script>
+        var aa=document.getElementsByClassName()
+       console.log('Select installation service'.toUpperCase()) 
+    </script>
+    有人说：时间会让美貌褪去，会让习惯改变，唯一不变的是闪光的灵魂。可是闪光的灵魂也会黯淡吧。一个善于沟通喜欢表达，能够共情能够感恩的人是多么难得呀。
+    你如今的气质里，藏着你读过的书，走过的路和爱过的人。
+</body>
+
+</html>

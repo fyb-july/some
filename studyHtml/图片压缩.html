@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <input type="file" onchange="handchange(this)">
+    <iframe src="" frameborder="0"></iframe>
+    <script>
+        
+        const handchange=(e)=>{
+            console.log(e.files[0])
+            compressPic(e.files[0],0.2)
+        }
+        function compressPic(file, quality) {
+            let reads = new FileReader();
+            reads.readAsDataURL(file)
+            reads.onload =function ({ target: { result: src }}) {
+                // 这里quality的范围是（0-1）
+                var canvas = document.createElement("canvas");
+                var ctx = canvas.getContext("2d");
+                var img = new Image();
+                img.src = src;
+                img.onload = function () {
+                    let width = img.width;
+                    canvas.width = width;
+                    canvas.height = width * (img.height / img.width);
+                    ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+                    // 转换成base64格式 quality为图片压缩质量 0-1之间  值越小压缩的越大 图片质量越差
+                    let data = canvas.toDataURL(file.type, quality);
+                    console.log(data)
+                }
+            };
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<style type="text/css">
+#div1 {width:198px; height:66px;padding:10px;border:1px solid #aaaaaa;}
+#drag1{
+    width: 70px;
+    height: 70px;
+    
+}
+</style>
+<script type="text/javascript">
+function allowDrop(ev)
+{
+ev.preventDefault();
+}
+
+function drag(ev)
+{
+ev.dataTransfer.setData("Text",ev.target.id);
+}
+
+function drop(ev)
+{
+    console.log(ev)
+    
+ev.preventDefault();
+var data=ev.dataTransfer.getData("Text");
+console.log(data)
+ev.target.appendChild(document.getElementById(data));
+}
+</script>
+</head>
+<body>
+
+<p>请把 W3School 的图片拖放到矩形中：</p>
+
+<div id="div1" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+<br />
+<!-- 修改兼容ipone 13 pro文字两行,修改手机端购买btn固定在底部,增加编码检查后可以购买,修改手机端插画大小 -->
+<img id="drag1"  src="../img/截屏2021-09-02 上午11.26.21.png" draggable="true" ondragstart="drag(event)" />
+版本更新：
+1，修改兼容ipone 13 pro等大屏手机的设备描述，修改手机插画大小。
+2，修改gift和mirror页面购买btn在手机端固定在底部
+3，增加邮编检查后才能跳转购买。
+安排：
+完善gift和mirror页面的新设计
+完成bundle购买模块开发
+
+
+</body>
+</html>

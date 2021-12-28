@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    4. persistence
+    Write a function, persistence, that takes in a positive parameter num and returns its multiplicative persistence,which is the number of times you must multiply the digits in num until you reach a single digit.
+
+   <!-- <div style="display: none;"> -->
+    #contactModel{
+        display:none;
+        overflow: hidden;
+        position:fixed;
+        width:720px;
+        height:360px;
+        margin-left:-360px;
+        margin-top:-180px;
+        left:50%;
+        top:50%;
+        z-index:10;
+        border-radius: 8px;
+        background:#fff;
+      }
+      #contactModel .closeModelIcon{
+        cursor: pointer;
+        position: absolute;
+        width: 32px;
+        height: 32px;
+        right:12px;
+        top:12px;
+      }
+      .contactLeftImg{
+        float:left;
+        width:272px;
+        height:100%;
+        background:#ccc;
+      }
+      .contactRight{
+        float:left;
+        width:448px;
+        height:100%;
+        padding:44px 24px 28px;
+      }
+      .contactRight p{
+        font-style: normal;
+        font-weight: 700;
+        font-size: 16px;
+        line-height: 24px;
+        text-align: center;
+        color: #F56A6D;
+        margin-bottom:4px;
+      }
+      .contactRight h2{
+        font-style: normal;
+        font-weight: bold;
+        font-size: 30px;
+        line-height: 40px;
+        text-align: center;
+        letter-spacing: -0.02em;
+        color: #0B090A;
+      }
+      .tipsIpt{
+        width: 300px;
+        height: 44px;
+        border: 1px solid #0B090A;
+        box-sizing: border-box;
+        border-radius: 8px;
+        margin-left:50px;
+      }
+      .contactRight .contactBtn{
+        display:block;
+        width: 300px;
+        height: 44px;
+        background: #F56A6D;
+        border-radius: 8px;
+        margin:0 auto;
+        color:#fff;
+        margin-top:12px;
+        font-weight: bold;
+        font-size: 16px;
+        line-height: 24px;
+        text-transform: uppercase;
+      }
+      .bannerLogo{
+        width:102px;
+        height:12px;
+        display: block;
+        margin: 44px auto 0;
+      }
+   <!-- </div> -->
+
+<script>
+        let num=0
+        persistence=(r)=>{
+            let reslut=1
+            if(r<10){
+                return num
+            }else {
+                num++
+                var splitStr = r.toString().split("");
+                for(var s=0;s<splitStr.length;s++){
+                    reslut=reslut*Number(splitStr[s])
+                }
+                console.log(reslut)
+                persistence(reslut)
+               return num
+            }
+        }
+     console.log(persistence(999))  
+     
+</script>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    input[type=checkbox]{    
+    visibility: hidden;
+}
+input[type="checkbox"] + label::before {
+    content: "\a0";  
+    display: inline-block;
+    width: 5vw; 
+    height: 5vw;  
+    margin-right: 4vw;    
+    margin-left: -2vw;  
+    border-radius: 1vw;   
+    background-color: silver;
+    text-indent: 0vw;
+    line-height: 5.2vw;    
+    vertical-align: 0vw;
+}
+input[type="checkbox"]:checked + label::before {
+    content: "\2714";   
+    color: #FFFFFF;     
+    background-color: yellowgreen;   
+}
+
+.tab_1 label{   
+    width: 60vw;
+    height: 16vw;
+    font-family: PingFangSC-Regular;
+    font-size: 4.3vw;
+    color: #000000;
+}
+</style>
+<body>
+    <div class="tab_1" v-for="(i, index) in all_stu_ls">
+        <input :id="index" class="tab_1_title" type="checkbox" :value="i['id']" v-model="check_box_ls">
+        <label :for="index">{{i.stu_name}}</label>
+    </div>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<!-- <script src="./aa.ts"></script> -->
+<Script>
+//    const arr= [{a:1,b:1,c:'1'},{a:1,b:1,c:4},{a:2,b:2},{a:2,b:2}]
+//     const obj=new Map();
+//         for (var i=0;i<arr.length;i++){
+//             let num=0
+//             let key1=`${num}-${arr[i].a}-${arr[i].b}`
+//             if(i===0){
+//                 obj.set(key=key1,value=[arr[i]])
+//             }
+//             if(arr[i].a===arr[i-1].a&&arr[i].b===arr[i-1].b){
+//                 if(!obj[ket1]){
+//                     obj.set(key=key1,value=[...obj[ket1],arr[i]])
+//                 }
+//             }else{
+//                 num++
+//                 obj.set(key=key1,value=[arr[i]])
+//             }
+//         }
+//     console.log(obj)
+
+const aa=new Promise((re,rj)=>{
+   try{
+    setTimeout(()=>{
+        re(50)
+    },3000)
+   } catch{
+       rj(4)
+   }
+})
+aa.then((res)=>{
+console.log(res)
+})
+</Script>
+</html>
