@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    body>div{
+        width: 100px;
+        height: 100px;
+        background-color: red;
+    }
+</style>
+<body>
+    <div id='firstId'>
+
+    </div>
+<script>
+        function sleep(duration) {
+            return new Promise(resolve => {
+                setTimeout(resolve, duration);
+            })
+        }
+        async function changeColor(color, duration) {
+            let changeDom=document.getElementById('firstId')
+            changeDom.style.backgroundColor=color
+            await sleep(duration);
+        }
+        async function main() {
+            while (true) {
+                await changeColor('red', 2000);
+                await changeColor('yellow', 1000);
+                await changeColor('green', 3000);
+            }
+        }
+        main(); 
+</script>
+</body>
+</html>

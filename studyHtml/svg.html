@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    @namespace svg url(http://www.w3.org/2000/svg);
+        /* Necessary to select only SVG <a> elements, and not also HTML’s.
+        See warning below */
+
+        svg|a:link, svg|a:visited {
+        cursor: pointer;
+        }
+
+        svg|a text,
+        text svg|a {
+        fill: blue; /* Even for text, SVG uses fill over color */
+        text-decoration: underline;
+        }
+
+        svg|a:hover, svg|a:active {
+        outline: dotted 1px blue;
+        }
+</style>
+<body>
+    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <!-- A link around a shape -->
+        <a href="">
+          <circle cx="5" cy="5" r="5"/>
+        </a>
+      
+        <!-- A link around a text -->
+        <a href="/docs/Web/SVG/Element/text">
+          <text x="6" y="6" text-anchor="smell">
+            &lt;circle&gt;
+          </text>
+        </a>
+      </svg>
+      <svg viewBox="0 0 10 10" xmlns="http://www.w3.org/2000/svg">
+        <!-- Some graphical objects to use -->
+        <defs>
+          <circle id="myCircle" cx="0" cy="0" r="5" />
+      
+          <linearGradient id="myGradient" gradientTransform="rotate(90)">
+            <stop offset="20%" stop-color="gold" />
+            <stop offset="90%" stop-color="red" />
+          </linearGradient>
+        </defs>
+      
+        <!-- using my graphical objects -->
+        <use x="5" y="5" href="#myCircle" fill="url('#myGradient')" />
+      </svg>
+</body>
+</html>
