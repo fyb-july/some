@@ -6,7 +6,6 @@ var de=(nums)=>{
                 if(count==2){
                     nums.splice(j,1)
                     j--
-                    // i--
                 }else{
                     count++
                 }

@@ -11,138 +11,6 @@
     <div id="cover" style="left: 100px; top: 100px"></div>
 
     <script>
-        //  //绘制染色体
-        //  function createChromosome(ctx,x,y,color,data){
-        //     //基因的宽度和高度
-        //     var rect_width = 20;//基因位的宽度
-        //     var rect_height = 10;//染色体的高度
-        //     var dis = 10;//基因位之间的距离
-        //     var first_x = 20;//第一个基因位距离开始的水平距离
-        //     var first_y = 1;//第一个基因位距离开始的水平距离
-        //     var radius = 4;//圆角矩形的半径
-            
-        //     //计算染色体的长度
-        //     var len = first_x * 2 + data.length * rect_width + (data.length - 1) * dis;
- 
-        //     //绘制圆角矩形
-        //     drawRoundRect(ctx, x, y, len, rect_height, radius);
- 
-        //     for(i=0;i<data.length;i++){
-        //         //绘制基因位位置
-        //         ctx.fillStyle="#FFFFFF";
-        //         ctx.fillStyle=color[i];
-        //         ctx.fillRect(x + first_x + dis * i + i * rect_width, y + first_y, rect_width, rect_height - 2 * first_y);
-        //         //绘制基因编码
-        //         ctx.fillStyle="#808080";
-        //         ctx.fillText(data[i], x + first_x + dis * i + i * rect_width + rect_width / 2 - 2, y - 2 * first_y);
-        //     }
-        //     return x + len;
-        // }
-        //  //绘制圆角矩形
-        //  function drawRoundRect(cxt, x, y, width, height, radius){
-        //     ctx.strokeStyle = "#262626";//线条颜色 
-        //     //开始绘制（从左上角开始顺时针绘制）
-        //     cxt.beginPath();
-        //     //左上角
-        //     cxt.arc(x + radius, y + radius, radius, Math.PI, Math.PI * 3 / 2);
-        //     cxt.lineTo(x + width - radius, y);
-        //     //右上角
-        //     cxt.arc(x + width - radius, y + radius, radius, Math.PI * 3 / 2, Math.PI * 2);
-        //     cxt.lineTo(x + width, y + height - radius);
-        //     //右下角
-        //     cxt.arc(x + width - radius, y + height - radius, radius, 0, Math.PI * 1 / 2);
-        //     cxt.lineTo(x + radius, y + height);
-        //     //左下角
-        //     cxt.arc(x + radius, y + height - radius, radius, Math.PI * 1 / 2, Math.PI);
-        //     cxt.lineTo(x, y + radius);
- 
-        //     cxt.closePath();
-        //     //绘制路径
-        //     ctx.stroke();   
-        // }
-        //  //绘制箭头
-        //  function drawArrow(ctx, fromX, fromY, toX, toY,theta,headlen,width,color) { 
-        //     theta = typeof(theta) != 'undefined' ? theta : 30; 
-        //     headlen = typeof(theta) != 'undefined' ? headlen : 10; 
-        //     width = typeof(width) != 'undefined' ? width : 1; 
-        //     color = typeof(color) != 'color' ? color : '#000'; // 计算各角度和对应的P2,P3坐标 
-        //     var angle = Math.atan2(fromY - toY, fromX - toX) * 180 / Math.PI, angle1 = (angle + theta) * Math.PI / 180, angle2 = (angle - theta) * Math.PI / 180, topX = headlen * Math.cos(angle1), topY = headlen * Math.sin(angle1), botX = headlen * Math.cos(angle2), botY = headlen * Math.sin(angle2); 
-        //     ctx.save(); 
-        //     ctx.beginPath(); 
-        //     var arrowX = fromX - topX, arrowY = fromY - topY; 
-        //     ctx.moveTo(arrowX, arrowY); 
-        //     ctx.moveTo(fromX, fromY); 
-        //     ctx.lineTo(toX, toY); 
-        //     arrowX = toX + topX; 
-        //     arrowY = toY + topY; 
-        //     ctx.moveTo(arrowX, arrowY); 
-        //     ctx.lineTo(toX, toY); arrowX = toX + botX; 
-        //     arrowY = toY + botY; 
-        //     ctx.lineTo(arrowX, arrowY); 
-        //     ctx.strokeStyle = color; 
-        //     ctx.lineWidth = width; 
-        //     ctx.stroke(); 
-        //     ctx.restore(); 
-        // }
-         //绘制静态对象
-        //  function drawBackground(ctx){
-        //     var startx_1 = 50;
-        //     var startx_2 = 30;
-        //     var starty_1 = 20;
-        //     var starty_2 = 50;
-        //     var starty_3 = 150;
-        //     var starty_4 = 200;
-        //     var dis1 = 50;
-        //     var dis2 = 100;
- 
-            // //第一步
-            // var color = ["#E5E5E5","#E5E5E5","#E5E5E5","#E5E5E5","#E5E5E5","#E5E5E5","#E5E5E5","#E5E5E5","#E5E5E5"];
-            // //编码
-            // //绘制罐染色体
-            // var c1 = createChromosome(ctx,startx_1,starty_1,color,[5,0,1,1,0,6,9,0,1]);
-            // //绘制塔染色体
-            // var c2 = createChromosome(ctx,c1 + dis1,starty_1,color,[1,0,2,2,0,2,3,0,1]);
-            // //绘制速度染色体
-            // var c3 = createChromosome(ctx,c2 + dis1,starty_1,color,[1,0,1,1,0,1,1,0,1]);
- 
-            // var color1 = ["#E5E5E5","#E5E5E5","#E5E5E5","#E5E5E5","#E5E5E5","#E5E5E5","#262626","#262626","#262626","#262626"];
-            // var color2 = ["#262626","#262626","#262626"];
-            // var color3 = ["#262626","#262626","#262626"];
-            // //解码
-            // //选择供油罐
-            // c1 = createChromosome(ctx,startx_2,dis2,color1,[0,1,2,3,4,5,6,7,8,9]);
-            // //选塔
-            // c2 = createChromosome(ctx,c1 + dis2,dis2,color2,[0,1,2]);
-            // //选择速度
-            // c3 = createChromosome(ctx,c2 + dis2,dis2,color3,[0,1,2]);
- 
-            // //绘制箭头
-            // drawArrow(ctx, 50, 35, 170,70,30,10,2,'#f36');
-            // drawArrow(ctx, 50, 35, 220,70,30,10,2,'#f36');
-            // drawArrow(ctx, 50, 35, 250,70,30,10,2,'#f36');
- 
-            //第二步
-            // var color = ["#E5E5E5","#E5E5E5","#E5E5E5","#E5E5E5","#E5E5E5","#E5E5E5","#E5E5E5","#E5E5E5","#E5E5E5"];
-            // //编码
-            // //绘制罐染色体
-            // c1 = createChromosome(ctx,startx_1,starty_3,color,[5,0,1,1,0,6,9,0,1]);
-            // //绘制塔染色体
-            // c2 = createChromosome(ctx,c1 + dis1,starty_3,color,[1,0,2,2,0,2,3,0,1]);
-            // //绘制速度染色体
-            // c3 = createChromosome(ctx,c2 + dis1,starty_3,color,[1,0,1,1,0,1,1,0,1]);
- 
-            // var color1 = ["#262626","#E5E5E5","#E5E5E5","#E5E5E5","#E5E5E5","#E5E5E5","#E5E5E5","#262626","#262626","#262626"];
-            // var color2 = ["#262626","#262626","#262626"];
-            // var color3 = ["#262626","#262626","#262626"];
-            // //解码
-            // //选择供油罐
-            // c1 = createChromosome(ctx,startx_2,starty_4,color1,[0,1,2,3,4,5,6,7,8,9]);
-            // //选塔
-            // c2 = createChromosome(ctx,c1 + dis2,starty_4,color2,[0,1,2]);
-            // //选择速度
-            // c3 = createChromosome(ctx,c2 + dis2,starty_4,color3,[0,1,2]);
-        // }
- 
         //创建圆滑块 
         function createBlob(x,y,width,height,color,alpha){            
             //定义对象
@@ -177,7 +45,7 @@
         // drawBackground(ctx);
         
         //创建滑块
-        var blob1 = createBlob(70,18,4,4,"#161616",0.5);
+        var blob1 = createBlob(70,18,20,20,"#161616",0.5);
         var blob2 = createBlob(100,40,4,4,"#161616",0.5);
         DrawBlob(blob1); 
         DrawBlob(blob2); 

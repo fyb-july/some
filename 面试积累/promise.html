@@ -32,6 +32,23 @@
             }
             return a
         }))
+        const aa=new Promise((re,rj)=>{
+            try{
+                setTimeout(()=>{
+                    re(50)
+                },3000)
+            } catch{
+                rj(4)
+            }
+            })
+            aa.then((res)=>{
+            console.log(res)
+        })
+        const a = Promise.resolve(42)
+        const b=new Promise(
+            resolve= ()=>{
+                42
+        })
     </script>
 </body>
 
