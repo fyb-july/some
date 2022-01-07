@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@2.0.0/dist/tf.min.js"></script>
+    <script src="https://unpkg.com/@tensorflow-models/mobilenet"> </script>
+    <script src="https://unpkg.com/hls.js/dist/hls.min.js"></script>
+</head>
+<body>
+    <iframe id='iframe'  width="425" height="344" src="https://www.youtube.com/embed/FiCiRkkfxhM" frameborder="0" allowfullscreen></iframe>
+    <video width=400 height=300 loop muted autoplay ></video>
+    <!-- <video width=400 height=300></video> -->
+    <p></p>
+    <img width=400 height=300 />
+    <script>
+       
+        const getVideoOpen=()=>{
+            const video = document.querySelector('video')
+            const image = document.querySelector('img')
+            image.crossOrigin="anonymous"
+            const status = document.querySelector("p")
+            const canvas = document.createElement('canvas')
+            const ctx = canvas.getContext('2d')
+            let model
+            main()
+            async function main () {
+            status.innerText = "Model loading..."
+            model = await mobilenet.load()
+            status.innerText = "Model is loaded!"
+            var hls = new Hls();
+            hls.loadSource("https://videodelivery.net/ba18a1a3d6569ebd5f6741e0e804711a/manifest/video.m3u8");
+            hls.attachMedia(video);
+            await video.play()
+            canvas.width = video.videoWidth
+            canvas.height = video.videoHeight
+            refresh()
+            async function refresh(){
+            ctx.drawImage(video, 0,0)
+            image.src = canvas.toDataURL('image/png')
+            await model.load()
+            const predictions = await model.classify(image)
+            const className = predictions[0].className
+            const percentage = Math.floor(100 * predictions[0].probability)
+            
+            status.innerHTML = percentage + '%' + ' ' + className
+            
+            setTimeout(refresh, 100)
+            }
+            }
+        }
+        getVideoOpen()
+    </script>
+</body>
+</html>
